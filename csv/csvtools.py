@@ -18,7 +18,7 @@ import os.path
 #param: sign 分隔符
 #return: []
 def csv_get_lines(csvfile,lines,offset=0,sign=','):
-	
+	#判断文件是否存在
 	if not os.path.exists(csvfile) :
 		return False
 	f=open(csvfile,'r')
@@ -26,18 +26,22 @@ def csv_get_lines(csvfile,lines,offset=0,sign=','):
 	j=0
 	datas=[]
 	for line in f :
+		#读取title
 		if i == 0:
 			line=line.strip('\n')
 			titles=line.split(sign)
 
+		#跳到指定的开始行
 		i=i+1
 		if i<offset :
 			continue
-	
+		
+		#以[{title:data,title:data,title:data}]的格式输出数据
 		if j<lines :
 			j=j+1
 			line=line.strip('\n')
 			data=line.split(sign)
+			#判断文件的格式是否正确
 			if not len(titles) == len(data) :
 				return False
 			
