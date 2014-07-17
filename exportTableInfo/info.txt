@@ -1,0 +1,25 @@
+CREATE TABLE `member` (
+  `uid` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+  `username` char(255) NOT NULL COMMENT '用户名',
+  `password` char(255) NOT NULL COMMENT '用户密码',
+  `email` char(255) NOT NULL COMMENT '用户邮箱',
+  `type` tinyint(2) NOT NULL COMMENT '用户类型，1管理员，2，学校，3学生',
+  `created` int(11) NOT NULL COMMENT '创建用户时间',
+  PRIMARY KEY (`uid`),
+  UNIQUE KEY `NewIndex1` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC
+
+CREATE TABLE `member_info` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键序列',
+  `uid` int(11) unsigned NOT NULL COMMENT '用户ID',
+  `name` char(50) NOT NULL COMMENT '真实姓名',
+  `selfcode` char(50) NOT NULL COMMENT '身份证号',
+  `address` char(255) NOT NULL COMMENT '地址',
+  `school` char(255) NOT NULL COMMENT '所属学校',
+  `collage` char(255) NOT NULL COMMENT '所属院系',
+  `years` tinyint(2) NOT NULL COMMENT '学制',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `NewIndex1` (`uid`),
+  CONSTRAINT `FK_member_info` FOREIGN KEY (`uid`) REFERENCES `member` (`uid`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC
+
